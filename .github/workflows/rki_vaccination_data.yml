@@ -10,6 +10,8 @@ on:
       - main
     paths-ignore:
       - '**/README.**'
+  schedule:
+    - '0 */2 * * * *'
 jobs: 
   update-data:
     name: Download and extract data 
