@@ -1,0 +1,28 @@
+---
+output: github_document
+---
+# vaccc19de_rki_data
+
+Collects data on the progress of COVID-19 vaccinations in Germany. Data is published by the RKI on [this page](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.html). 
+
+The data is collected via GitHub action which uses the accompanying [{vaccc19de} R :package:](https://github.com/friep/vaccc19de). You can find the raw data (xlsx files and sheets as csvs) in `data/raw` and the time series at `data/cumulative_time_series.csv`.   
+
+```{r echo=FALSE, message=FALSE}
+data <- readr::read_csv("data/cumulative_time_series.csv")
+cnames <- colnames(data)
+df <- tibble::tribble(
+    ~type, ~description,
+    "datetime", "datetime until which data is included ('Datenstand') as specified in the Excel file.",
+    "datetime", "datetime when data was downloaded from RKI website",
+    "character", "full name of Bundesland", 
+    "character", "ISO 3166-2 of Bundesland",
+    "double", "Cumulative total number of vaccinations in the Bundesland",
+    "double", "Difference to previous day (~roughly corresponds to people vaccinated since then although delays in reporting could be the case",
+    "double", "Total number of people vaccinated because of their age so far (cumulative)",
+    "double", "Total number of people vaccinated because of their profession so far (cumulative)",
+    "double", "Total number of people vaccinated because of medical reasons so far (cumulative)",
+    "double", "Total number of people in nursing homes so far (cumulative)"
+)
+df$col <- cnames
+knitr::kable(dplyr::select(df, col, type, description))
+```
