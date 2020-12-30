@@ -10,6 +10,16 @@ The data is collected via GitHub action which uses the accompanying
 find the raw data (xlsx files and sheets as csvs) in `data/raw` and the
 time series at `data/cumulative_time_series.csv`.
 
+# Data
+
+## `data/cumulative_time_series.csv`
+
+Read in directly from GitHub using R:
+
+``` r
+cumulative_ts <- readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/cumulative_time_series.csv")
+```
+
 | col                      | type      | description                                                                                                                      |
 |:-------------------------|:----------|:---------------------------------------------------------------------------------------------------------------------------------|
 | ts\_datenstand           | datetime  | datetime until which data is included (‘Datenstand’) as specified in the Excel file.                                             |
@@ -22,3 +32,5 @@ time series at `data/cumulative_time_series.csv`.
 | berufliche\_indikation   | double    | Total number of people vaccinated because of their profession so far (cumulative)                                                |
 | medizinische\_indikation | double    | Total number of people vaccinated because of medical reasons so far (cumulative)                                                 |
 | pflegeheim\_bewohner\_in | double    | Total number of people in nursing homes so far (cumulative)                                                                      |
+
+# Contribute

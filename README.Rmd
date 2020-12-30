@@ -7,6 +7,14 @@ Collects data on the progress of COVID-19 vaccinations in Germany. Data is publi
 
 The data is collected via GitHub action which uses the accompanying [{vaccc19de} R :package:](https://github.com/friep/vaccc19de). You can find the raw data (xlsx files and sheets as csvs) in `data/raw` and the time series at `data/cumulative_time_series.csv`.   
 
+# Data
+## `data/cumulative_time_series.csv`
+
+Read in directly from GitHub using R:
+```{r echo=TRUE, message=FALSE}
+cumulative_ts <- readr::read_csv("https://raw.githubusercontent.com/friep/vaccc19de_rki_data/main/data/cumulative_time_series.csv")
+```
+
 ```{r echo=FALSE, message=FALSE}
 data <- readr::read_csv("data/cumulative_time_series.csv")
 cnames <- colnames(data)
@@ -26,3 +34,12 @@ df <- tibble::tribble(
 df$col <- cnames
 knitr::kable(dplyr::select(df, col, type, description))
 ```
+
+
+# Contribute
+Contributions are very welcome. Depending on where you want to add features, please open an issue here or on [{vaccc19de} R](https://github.com/friep/vaccc19de):
+
+- features relating to data wrangling, data cleaning of the original excel file --> [{vaccc19de} R](https://github.com/friep/vaccc19de)
+- features relating to GitHub Action and daily updates of the data --> this repository
+
+Of course, features might require changes in both repositories. Please still open issues in both repositories and then link them to each other. 
