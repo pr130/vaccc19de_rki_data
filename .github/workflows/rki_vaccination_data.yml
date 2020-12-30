@@ -11,7 +11,7 @@ on:
     paths-ignore:
       - '**/README.**'
   schedule:
-      - cron: '0 */2 * * * *'
+      - cron: '0 */2 * * *'
 jobs: 
   update-data:
     name: Download and extract data 
