@@ -11,7 +11,7 @@ rki_extract_sheet_csvs(xlsx_path, "data/raw")
 rki_data <- rki_extract_cumulative_data(xlsx_path)
 
 # update time series
-# read in
+# read in existing data
 cumulative <- readr::read_csv("data/cumulative_time_series.csv")
 
 # check whether the new Datenstand is already in the time series data
