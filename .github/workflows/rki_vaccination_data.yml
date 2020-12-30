@@ -1,0 +1,42 @@
+name: Download data from RKI
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/README.**'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**/README.**'
+jobs: 
+  update-data:
+    name: Download and extract data 
+    runs-on: "ubuntu-latest"
+    steps: 
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: 'release'
+      - name: install vaccc19de
+        run: |
+          install.packages('remotes')
+          remotes::install_github("friep/vaccc19de")
+          install.packages('glue')
+          install.packages('readr')
+        shell: Rscript {0}
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: "Download data"
+        run: |
+          source('R/download_and_update.R')
+        shell: Rscript {0}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: friep
+          author_email: bot_user@frie.codes
+          message: "update data"
+          add: "data/ --force"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
