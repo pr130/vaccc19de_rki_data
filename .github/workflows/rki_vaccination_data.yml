@@ -13,7 +13,7 @@ on:
 jobs: 
   update-data:
     name: Download and extract data 
-    runs-on: "ubuntu-latest"
+    runs-on: "macos-latest"
     steps: 
       - uses: r-lib/actions/setup-r@v1
         with:
