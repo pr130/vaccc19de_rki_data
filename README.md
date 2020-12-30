@@ -10,6 +10,19 @@ The data is collected via GitHub action which uses the accompanying
 find the raw data (xlsx files and sheets as csvs) in `data/raw` and the
 time series at `data/cumulative_time_series.csv`.
 
+# License
+
+## Data
+
+I’m currently figuring out how to license the data / whether there are
+any restrictions from RKI’s side - I don’t suspect that there are any
+but I haven’t found any information on that yet.
+
+## Code
+
+Code is licensed under a MIT License. See LICENSE.md for more
+information.
+
 # Data
 
 ## `data/cumulative_time_series.csv`
@@ -34,3 +47,15 @@ cumulative_ts <- readr::read_csv("https://raw.githubusercontent.com/friep/vaccc1
 | pflegeheim\_bewohner\_in | double    | Total number of people in nursing homes so far (cumulative)                                                                      |
 
 # Contribute
+
+Contributions are very welcome. Depending on where you want to add
+features, please open an issue here or on [{vaccc19de}
+R](https://github.com/friep/vaccc19de):
+
+-   features relating to data wrangling, data cleaning of the original
+    excel file –&gt; [{vaccc19de} R](https://github.com/friep/vaccc19de)
+-   features relating to GitHub Action and daily updates of the data
+    –&gt; this repository
+
+Of course, features might require changes in both repositories. Please
+still open issues in both repositories and then link them to each other.

@@ -7,6 +7,14 @@ Collects data on the progress of COVID-19 vaccinations in Germany. Data is publi
 
 The data is collected via GitHub action which uses the accompanying [{vaccc19de} R :package:](https://github.com/friep/vaccc19de). You can find the raw data (xlsx files and sheets as csvs) in `data/raw` and the time series at `data/cumulative_time_series.csv`.   
 
+# License
+## Data 
+I'm currently figuring out how to license the data / whether there are any restrictions from RKI's side - I don't suspect that there are any but I haven't found any information on that yet.
+
+## Code
+Code is licensed under a MIT License. See LICENSE.md for more information. 
+
+
 # Data
 ## `data/cumulative_time_series.csv`
 
@@ -43,3 +51,4 @@ Contributions are very welcome. Depending on where you want to add features, ple
 - features relating to GitHub Action and daily updates of the data --> this repository
 
 Of course, features might require changes in both repositories. Please still open issues in both repositories and then link them to each other. 
+
