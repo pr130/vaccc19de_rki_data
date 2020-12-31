@@ -5,13 +5,15 @@ on:
       - main
     paths-ignore:
       - '**/README.**'
-      - 'data'
+      - 'data/*'
+      - 'R/maintenance/*'
   pull_request:
     branches:
       - main
     paths-ignore:
       - '**/README.**'
-      - 'data'
+      - 'data/*'
+      - 'R/maintenance/*'
   schedule:
       - cron: '0 */1 * * *'
 jobs:
