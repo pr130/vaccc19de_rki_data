@@ -11,12 +11,19 @@ The data is collected via GitHub action which uses the accompanying [{vaccc19de}
 ## Data 
 I'm currently figuring out how to license the data / whether there are any restrictions from RKI's side - I don't suspect that there are any but I haven't found any information on that yet.
 
+:warning: I take no liability for the correctness of the data! :warning: 
+
 ## Code
 Code is licensed under a MIT License. See LICENSE.md for more information. 
 
 
 # Data
 ## `data/cumulative_time_series.csv`
+
+### Disclaimers :warning:
+
+- All counts are cumulative (except `differenz_zum_vortag`)
+- timestamps are in UTC, not in Berlin time. 
 
 Read in directly from GitHub using R:
 ```{r echo=TRUE, message=FALSE}
@@ -28,8 +35,8 @@ data <- readr::read_csv("data/cumulative_time_series.csv")
 cnames <- colnames(data)
 df <- tibble::tribble(
     ~type, ~description,
-    "datetime", "datetime until which data is included ('Datenstand') as specified in the Excel file.",
-    "datetime", "datetime when data was downloaded from RKI website",
+    "datetime", "datetime until which data is included ('Datenstand') as specified in the Excel file. Given in UTC",
+    "datetime", "datetime when data was downloaded from RKI website. Given in UTC",
     "character", "full name of Bundesland", 
     "character", "ISO 3166-2 of Bundesland",
     "double", "Cumulative total number of vaccinations in the Bundesland",
@@ -37,7 +44,8 @@ df <- tibble::tribble(
     "double", "Total number of people vaccinated because of their age so far (cumulative)",
     "double", "Total number of people vaccinated because of their profession so far (cumulative)",
     "double", "Total number of people vaccinated because of medical reasons so far (cumulative)",
-    "double", "Total number of people in nursing homes so far (cumulative)"
+    "double", "Total number of people in nursing homes so far (cumulative)",
+    "character", "Notes as indicated by * in the Excel sheet."
 )
 df$col <- cnames
 knitr::kable(dplyr::select(df, col, type, description))
@@ -45,9 +53,9 @@ knitr::kable(dplyr::select(df, col, type, description))
 
 
 # Contribute
-Contributions are very welcome. Depending on where you want to add features, please open an issue here or on [{vaccc19de} R](https://github.com/friep/vaccc19de):
+Contributions are very welcome. Depending on where you want to add features, please open an issue here or on [{vaccc19de}](https://github.com/friep/vaccc19de):
 
-- features relating to data wrangling, data cleaning of the original excel file --> [{vaccc19de} R](https://github.com/friep/vaccc19de)
+- features relating to data wrangling, data cleaning of the original excel file --> [{vaccc19de}](https://github.com/friep/vaccc19de)
 - features relating to GitHub Action and daily updates of the data --> this repository
 
 Of course, features might require changes in both repositories. Please still open issues in both repositories and then link them to each other. 
