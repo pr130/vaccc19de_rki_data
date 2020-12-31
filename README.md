@@ -34,6 +34,10 @@ information.
 
   - All counts are cumulative (except `differenz_zum_vortag`)
   - timestamps are in UTC, not in Berlin time.
+  - as stated in the raw xlsx file, one vaccinated person can have
+    multiple indications: “Anmerkung zu den Indikationen: Es können
+    mehrere Indikationen je geimpfter Person vorliegen.”
+  - always check the raw xlsx (see folder `data/raw`)
 
 Read in directly from GitHub using
 R:
