@@ -5,18 +5,20 @@ on:
       - main
     paths-ignore:
       - '**/README.**'
+      - 'data'
   pull_request:
     branches:
       - main
     paths-ignore:
       - '**/README.**'
+      - 'data'
   schedule:
-      - cron: '0 */2 * * *'
-jobs: 
+      - cron: '0 */1 * * *'
+jobs:
   update-data:
-    name: Download and extract data 
+    name: Download and extract data
     runs-on: "macos-latest"
-    steps: 
+    steps:
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: 'release'
@@ -41,4 +43,4 @@ jobs:
           message: "update data"
           add: "data/ --force"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
