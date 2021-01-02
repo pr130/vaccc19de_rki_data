@@ -41,7 +41,7 @@ jobs:
         id: check-whether-updated
         run: |
           TS_DATENSTAND=$(cat /tmp/ts_datenstand.txt)
-          IS_UPDATED=1; [ "$TS_DATENSTAND" == "No update" ] || res=0
+          IS_UPDATED=1; [ "$TS_DATENSTAND" == "no_update" ] || res=0
           echo $TS_DATENSTAND
           echo $IS_UPDATED
           echo "::set-output name=TS_DATENSTAND::$TS_DATENSTAND"
