@@ -2,8 +2,7 @@ library(readr)
 library(vaccc19de)
 
 # download
-# xlsx_path <- rki_download_xlsx("data/raw")
-xlsx_path <- "data/raw/2021-01-02T143106_impfmonitoring.xlsx"
+xlsx_path <- rki_download_xlsx("data/raw")
 
 # store raw data
 csv_paths <- rki_extract_sheet_csvs(xlsx_path, "data/raw")
