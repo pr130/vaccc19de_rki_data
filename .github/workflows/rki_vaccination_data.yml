@@ -37,12 +37,23 @@ jobs:
         run: |
           source('R/download_and_update.R')
         shell: Rscript {0}
+      - name: "Read datenstand and check whether data was updated" 
+        id: check-whether-updated
+        run: |
+          DATENSTAND=$(cat /tmp/datenstand.txt)
+          IS_UPDATED=1; [ "$DATENSTAND" == "No update" ] || res=0
+          echo $DATENSTAND
+          echo $IS_UPDATED
+          echo "::set-output name=DATENSTAND::$DATENSTAND"
+          echo "::set-output name=IS_UPDATED::IS_UPDATED"
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
+        if:  ${{ steps.check-whether-updated.outputs.IS_UPDATED == 1 }}
         with:
-          author_name: friep
+          author_name: "GitHub Action"
           author_email: bot_user@frie.codes
-          message: "update data"
+          message: format('{{Update with data from {0}}}', ${{steps.check-whether-updated.outputs.DATENSTAND}})
           add: "data/ --force"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
