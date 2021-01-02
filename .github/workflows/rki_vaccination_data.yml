@@ -66,7 +66,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ format('v{0}', steps.check-whether-updated.outputs.TS_DATENSTAND) }}
-          release_name: ${{ format('Data up to {0}', steps.check-whether-updated.outputs.TS_DATENSTAND) }}
+          release_name: ${{ format('{0} vaccc19de_rki_data', steps.check-whether-updated.outputs.TS_DATENSTAND) }}
           body: |
             Add data up to ${{steps.check-whether-updated.outputs.TS_DATENSTAND}}
             Downloaded at ${{steps.check-whether-updated.outputs.TS_DOWNLOAD}}
