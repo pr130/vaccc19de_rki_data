@@ -18,6 +18,8 @@ cumulative <- readr::read_csv("data/cumulative_time_series.csv")
 if (unique(rki_data$ts_datenstand) == max(cumulative$ts_datenstand)) {
   # no new data
   print(glue::glue("No new data. Skipping update."))
+  readr::write_lines("no_update", "/tmp/ts_datenstand.txt")
+  readr::write_lines("no_update", "/tmp/ts_download.txt")
   fs::file_delete(c(xlsx_path, csv_paths))
   quit(status = 0, save = "no")
 }
@@ -27,3 +29,5 @@ cumulative <- cumulative %>%
   dplyr::bind_rows(rki_data)
 
 cumulative %>% readr::write_csv("data/cumulative_time_series.csv")
+readr::write_lines(format(unique(rki_data$ts_datenstand), "%Y-%m-%dT%H%M%S", tz = "Europe/Berlin"), "/tmp/ts_datenstand.txt")
+readr::write_lines(format(unique(rki_data$ts_download), "%Y-%m-%dT%H%M%S", tz = "Europe/Berlin"), "/tmp/ts_download.txt")
