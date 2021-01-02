@@ -29,5 +29,6 @@ cumulative <- cumulative %>%
   dplyr::bind_rows(rki_data)
 
 cumulative %>% readr::write_csv("data/cumulative_time_series.csv")
+# write out ts_download and ts_datenstand for gh actions
 readr::write_lines(format(unique(rki_data$ts_datenstand), "%Y-%m-%dT%H%M%S", tz = "Europe/Berlin"), "/tmp/ts_datenstand.txt")
 readr::write_lines(format(unique(rki_data$ts_download), "%Y-%m-%dT%H%M%S", tz = "Europe/Berlin"), "/tmp/ts_download.txt")
