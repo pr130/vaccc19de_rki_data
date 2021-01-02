@@ -56,7 +56,7 @@ jobs:
           author_email: bot_user@frie.codes
           message: ${{ format('{{ Update with data up to {0}}}', steps.check-whether-updated.outputs.TS_DATENSTAND) }}
           add: "data/ --force"
-          tag: ${{ format('{{ v{0} }}, ${{steps.check-whether-updated.outputs.TS_DATENSTAND}} ) }}
+          tag: ${{ format('{{ v{0} }}, steps.check-whether-updated.outputs.TS_DATENSTAND) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
