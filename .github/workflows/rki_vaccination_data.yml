@@ -54,8 +54,9 @@ jobs:
         with:
           author_name: "GitHub Action"
           author_email: bot_user@frie.codes
-          message: format('{{Update with data up to {0}}}', ${{steps.check-whether-updated.outputs.TS_DATENSTAND}})
+          message: ${{ format('{{Update with data up to {0}}}', ${{steps.check-whether-updated.outputs.TS_DATENSTAND}}) }}
           add: "data/ --force"
+          tag: ${{ format('{{ v{0} }}, ${{steps.check-whether-updated.outputs.TS_DATENSTAND}} ) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
@@ -65,8 +66,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v${{steps.check-whether-updated.outputs.TS_DATENSTAND}}
-          release_name: format('{{Data up to {0}}}', ${{steps.check-whether-updated.outputs.TS_DATENSTAND}})
+          tag_name: ${{ format('{{ v{0} }}, ${{steps.check-whether-updated.outputs.TS_DATENSTAND}} ) }}
+          release_name: ${{ format('{{Data up to {0}}}', ${{steps.check-whether-updated.outputs.TS_DATENSTAND}}) }}
           body: |
             Add data as of ${{steps.check-whether-updated.outputs.TS_DATENSTAND}}
             Downloaded at ${{steps.check-whether-updated.outputs.TS_DOWNLOAD}}
